@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage Base de Glisse Hardelot</title>
+    <style>
+        :root {
+            --bleu-marine: #004a99;
+            --couleur-sable: #d2b48c;
+            --blanc: #ffffff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--blanc);
+            overflow: hidden;
+            color: var(--bleu-marine);
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .active { display: flex; }
+
+        /* PARTIE 1 */
+        .border-sable {
+            border: 5px solid var(--couleur-sable);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            margin: 0;
+            color: var(--bleu-marine);
+        }
+
+        .logo-main { width: 500px; height: auto; }
+
+        /* PARTIE 2 */
+        .webcam-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .webcam-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* Zoom et recadrage pour enlever les parties floues/menus */
+            transform: scale(1.15);
+            transform-origin: center center;
+        }
+
+        .title-overlay {
+            position: absolute;
+            top: 20px;
+            background: var(--bleu-marine);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 2rem;
+            z-index: 10;
+        }
+
+        /* PARTIE 3 */
+        .title-meteo {
+            background-color: var(--bleu-marine);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            display: inline-block;
+            font-size: 2.5rem;
+            margin: 20px 0;
+            text-transform: uppercase;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            width: 95%;
+            height: 90%;
+            align-items: center;
+        }
+
+        .meteo-top { width: 100%; margin-bottom: 20px; }
+
+        .meteo-bottom {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .maree-box {
+            border: 3px solid var(--couleur-sable);
+            padding: 10px;
+            background: white;
+        }
+
+        .partenaires {
+            display: flex;
+            justify-content: space-around;
+            width: 70%;
+            align-items: flex-end;
+        }
+
+        .partenaire-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .partenaire-item img {
+            height: 120px;
+            width: auto;
+            margin-top: 10px;
+        }
+
+        .partenaire-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--bleu-marine);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="slide1" class="slide active">
+        <div class="border-sable">
+            <h1>BIENVENUE A LA BASE DE GLISSE D'HARDELOT</h1>
+        </div>
+        <img src="https://i.ibb.co/f6KYPQq/Design-sans-titre.jpg" class="logo-main" alt="Logo">
+    </div>
+
+    <div id="slide2" class="slide">
+        <div class="title-overlay">WEBCAM EN DIRECT - NEUCHATEL HARDELOT</div>
+        <div class="webcam-container">
+            <iframe src="https://pv.viewsurf.com/1246/Neufchatel-Hardelot?i=NTMyMDo" class="webcam-frame"></iframe>
+        </div>
+    </div>
+
+    <div id="slide3" class="slide">
+        <div class="content-container">
+            <div class="title-meteo">PREVISION METEO EN DIRECT</div>
+            
+            <div class="meteo-top">
+                <script id="wg_fwdg_1906_100_1776432265339">
+                (function (window, document) {
+                  var loader = function () {
+                    var arg = ["s=1906" ,"m=100","uid=wg_fwdg_1906_100_1776432265339" ,"wj=knots" ,"tj=c" ,"waj=m" ,"tij=cm" ,"odh=0" ,"doh=24" ,"fhours=156" ,"hrsm=1" ,"vt=forecasts" ,"lng=fr" ,"idbs=1" ,"p=WINDSPD,GUST,SMER,TMPE,FLHGT,CDC,APCP1s,RATING"];
+                    var script = document.createElement("script");
+                    var tag = document.getElementsByTagName("script")[0];
+                    script.src = "https://www.windguru.cz/js/widget.php?"+(arg.join("&"));
+                    tag.parentNode.insertBefore(script, tag);
+                  };
+                  window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+                })(window, document);
+                </script>
+            </div>
+
+            <div class="meteo-bottom">
+                <div class="maree-box">
+                    <iframe src="https://horloge.maree.frbateaux.net/ws7" width="226" height="217" frameborder="0" scrolling="no"></iframe>
+                </div>
+
+                <div class="partenaires">
+                    <div class="partenaire-item">
+                        <div class="partenaire-title">KMCO</div>
+                        <img src="https://i.ibb.co/q3XbsKcw/logo-kmco.jpg" alt="KMCO">
+                    </div>
+                    <div class="partenaire-item">
+                        <div class="partenaire-title">DRAKKARS</div>
+                        <img src="https://i.ibb.co/xqYCyYTT/5.jpg" alt="DRAKKARS">
+                    </div>
+                    <div class="partenaire-item">
+                        <div class="partenaire-title">CNH</div>
+                        <img src="https://i.ibb.co/Txb8qpMV/LOGO-CNH-00-page-0001-1.jpg" alt="CNH">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 3;
+        
+        function showSlide(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('slide' + n).classList.add('active');
+        }
+
+        function runRotation() {
+            // Slide 1 : 15 secondes
+            showSlide(1);
+            setTimeout(() => {
+                // Slide 2 : 60 secondes
+                showSlide(2);
+                setTimeout(() => {
+                    // Slide 3 : 45 secondes
+                    showSlide(3);
+                    setTimeout(() => {
+                        runRotation(); // Recommence la boucle
+                    }, 45000);
+                }, 60000);
+            }, 15000);
+        }
+
+        // Démarrage de la boucle après chargement
+        window.onload = runRotation;
+    </script>
+</body>
+</html>
