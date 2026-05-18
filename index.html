@@ -11,6 +11,10 @@
             --blanc: #ffffff;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
@@ -43,18 +47,53 @@
         /* PARTIE 1 */
         .border-sable {
             border: 5px solid var(--couleur-sable);
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: clamp(20px, 4vw, 40px);
+            margin-bottom: clamp(15px, 3vh, 30px);
+            max-width: 90vw;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: clamp(2rem, 5vw, 5rem);
             text-transform: uppercase;
             margin: 0;
             color: var(--bleu-marine);
         }
 
-        .logo-main { width: 500px; height: auto; }
+        .logo-main { 
+            max-width: 60vw; 
+            max-height: 35vh; 
+            object-fit: contain;
+            width: auto; 
+        }
+
+        .partenaires-accueil {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            align-items: center;
+            margin-top: 4vh;
+            background: rgba(0, 74, 153, 0.03);
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .partenaire-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .partenaire-item img {
+            height: clamp(60px, 10vh, 120px);
+            width: auto;
+            margin-top: 10px;
+        }
+
+        .partenaire-title {
+            font-weight: bold;
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            color: var(--bleu-marine);
+        }
 
         /* PARTIE 2 */
         .webcam-container {
@@ -68,7 +107,6 @@
             width: 100%;
             height: 100%;
             border: none;
-            /* Zoom et recadrage pour enlever les parties floues/menus */
             transform: scale(1.15);
             transform-origin: center center;
         }
@@ -80,7 +118,7 @@
             color: white;
             padding: 10px 30px;
             border-radius: 50px;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
             z-index: 10;
         }
 
@@ -88,11 +126,11 @@
         .title-meteo {
             background-color: var(--bleu-marine);
             color: white;
-            padding: 15px 40px;
+            padding: 10px 40px;
             border-radius: 30px;
             display: inline-block;
-            font-size: 2.5rem;
-            margin: 20px 0;
+            font-size: 2.2rem;
+            margin: 10px 0 20px 0;
             text-transform: uppercase;
         }
 
@@ -100,49 +138,90 @@
             display: flex;
             flex-direction: column;
             width: 95%;
-            height: 90%;
+            height: 95%;
             align-items: center;
+            justify-content: flex-start;
         }
 
-        .meteo-top { width: 100%; margin-bottom: 20px; }
-
-        .meteo-bottom {
+        .meteo-split {
             display: flex;
+            flex-direction: row;
             width: 100%;
-            justify-content: space-around;
+            height: 100%;
             align-items: center;
-            margin-top: 20px;
+            justify-content: space-between;
+            gap: 20px;
         }
 
-        .maree-box {
-            border: 3px solid var(--couleur-sable);
-            padding: 10px;
+        .meteo-left {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .meteo-divider {
+            width: 4px;
+            height: 80%;
+            background-color: var(--bleu-marine);
+            border-radius: 2px;
+            opacity: 0.2;
+        }
+
+        .meteo-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .tide-container {
+            border: 3px solid var(--bleu-marine);
+            padding: 5px;
             background: white;
+            border-radius: 10px;
+            /* Zoom ajusté pour qu'il prenne la bonne taille dans sa colonne */
+            zoom: 0.8; 
+            -moz-transform: scale(0.8);
+            -moz-transform-origin: center center;
         }
 
-        .partenaires {
+        /* CONTROLS */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             display: flex;
-            justify-content: space-around;
-            width: 70%;
-            align-items: flex-end;
+            gap: 10px;
+            z-index: 1000;
         }
 
-        .partenaire-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .partenaire-item img {
-            height: 120px;
-            width: auto;
-            margin-top: 10px;
-        }
-
-        .partenaire-title {
-            font-weight: bold;
-            font-size: 1.2rem;
+        .speed-btn, .next-btn {
+            font-size: 1.5rem;
             color: var(--bleu-marine);
+            cursor: pointer;
+            opacity: 0.2;
+            transition: opacity 0.3s;
+            user-select: none;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: bold;
+        }
+
+        .next-btn { font-size: 2rem; }
+
+        .speed-btn:hover, .next-btn:hover {
+            opacity: 1;
+            background: white;
         }
     </style>
 </head>
@@ -153,6 +232,21 @@
             <h1>BIENVENUE A LA BASE DE GLISSE D'HARDELOT</h1>
         </div>
         <img src="https://i.ibb.co/f6KYPQq/Design-sans-titre.jpg" class="logo-main" alt="Logo">
+        
+        <div class="partenaires-accueil">
+            <div class="partenaire-item">
+                <div class="partenaire-title">KMCO</div>
+                <img src="https://i.ibb.co/q3XbsKcw/logo-kmco.jpg" alt="KMCO">
+            </div>
+            <div class="partenaire-item">
+                <div class="partenaire-title">DRAKKARS</div>
+                <img src="https://i.ibb.co/xqYCyYTT/5.jpg" alt="DRAKKARS">
+            </div>
+            <div class="partenaire-item">
+                <div class="partenaire-title">CNH</div>
+                <img src="https://i.ibb.co/Txb8qpMV/LOGO-CNH-00-page-0001-1.jpg" alt="CNH">
+            </div>
+        </div>
     </div>
 
     <div id="slide2" class="slide">
@@ -166,70 +260,99 @@
         <div class="content-container">
             <div class="title-meteo">PREVISION METEO EN DIRECT</div>
             
-            <div class="meteo-top">
-                <script id="wg_fwdg_1906_100_1776432265339">
-                (function (window, document) {
-                  var loader = function () {
-                    var arg = ["s=1906" ,"m=100","uid=wg_fwdg_1906_100_1776432265339" ,"wj=knots" ,"tj=c" ,"waj=m" ,"tij=cm" ,"odh=0" ,"doh=24" ,"fhours=156" ,"hrsm=1" ,"vt=forecasts" ,"lng=fr" ,"idbs=1" ,"p=WINDSPD,GUST,SMER,TMPE,FLHGT,CDC,APCP1s,RATING"];
-                    var script = document.createElement("script");
-                    var tag = document.getElementsByTagName("script")[0];
-                    script.src = "https://www.windguru.cz/js/widget.php?"+(arg.join("&"));
-                    tag.parentNode.insertBefore(script, tag);
-                  };
-                  window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
-                })(window, document);
-                </script>
-            </div>
-
-            <div class="meteo-bottom">
-                <div class="maree-box">
-                    <iframe src="https://horloge.maree.frbateaux.net/ws7" width="226" height="217" frameborder="0" scrolling="no"></iframe>
+            <div class="meteo-split">
+                <div class="meteo-left">
+                    <script id="wg_fwdg_1906_100_1776432265339">
+                    (function (window, document) {
+                      var loader = function () {
+                        // Changement de hrsm=1 à hrsm=3 pour voir des prévisions toutes les 3 heures et donc plus de jours
+                        var arg = ["s=1906" ,"m=100","uid=wg_fwdg_1906_100_1776432265339" ,"wj=knots" ,"tj=c" ,"waj=m" ,"tij=cm" ,"odh=0" ,"doh=24" ,"fhours=156" ,"hrsm=3" ,"vt=forecasts" ,"lng=fr" ,"idbs=1" ,"p=WINDSPD,GUST,SMER,TMPE,FLHGT,CDC,APCP1s,RATING"];
+                        var script = document.createElement("script");
+                        var tag = document.getElementsByTagName("script")[0];
+                        script.src = "https://www.windguru.cz/js/widget.php?"+(arg.join("&"));
+                        tag.parentNode.insertBefore(script, tag);
+                      };
+                      window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+                    })(window, document);
                 </div>
 
-                <div class="partenaires">
-                    <div class="partenaire-item">
-                        <div class="partenaire-title">KMCO</div>
-                        <img src="https://i.ibb.co/q3XbsKcw/logo-kmco.jpg" alt="KMCO">
-                    </div>
-                    <div class="partenaire-item">
-                        <div class="partenaire-title">DRAKKARS</div>
-                        <img src="https://i.ibb.co/xqYCyYTT/5.jpg" alt="DRAKKARS">
-                    </div>
-                    <div class="partenaire-item">
-                        <div class="partenaire-title">CNH</div>
-                        <img src="https://i.ibb.co/Txb8qpMV/LOGO-CNH-00-page-0001-1.jpg" alt="CNH">
+                <div class="meteo-divider"></div>
+
+                <div class="meteo-right">
+                    <div class="tide-container">
+                        <script src="https://services.data.shom.fr/hdm/vignette/grande/BOULOGNE-SUR-MER?locale=fr"></script>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
+    <div class="controls">
+        <div class="speed-btn" onclick="toggleFullscreen()" title="Plein écran">&#x26F6;</div>
+        <div class="speed-btn" id="speedBtn" onclick="toggleSpeed()" title="Vitesse">x1</div>
+        <div class="next-btn" onclick="goToNextSlide()" title="Suivant">&#10140;</div>
+    </div>
+
     <script>
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Erreur lors du passage en plein écran: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
         let currentSlide = 1;
         const totalSlides = 3;
+        let slideTimeout;
+        
+        let speedMultiplier = 1;
+        const speeds = [0.5, 1, 1.5, 2];
+        let speedIndex = 1;
+
+        function toggleSpeed() {
+            speedIndex = (speedIndex + 1) % speeds.length;
+            speedMultiplier = speeds[speedIndex];
+            document.getElementById('speedBtn').innerText = 'x' + speedMultiplier.toString().replace('.', ',');
+            
+            clearTimeout(slideTimeout);
+            let baseDuration = 15000;
+            if (currentSlide === 1) baseDuration = 15000;
+            if (currentSlide === 2) baseDuration = 60000;
+            if (currentSlide === 3) baseDuration = 45000;
+            slideTimeout = setTimeout(goToNextSlide, baseDuration / speedMultiplier);
+        }
         
         function showSlide(n) {
             document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
             document.getElementById('slide' + n).classList.add('active');
+            currentSlide = n;
+        }
+
+        function goToNextSlide() {
+            clearTimeout(slideTimeout);
+            let next = currentSlide + 1;
+            if (next > totalSlides) next = 1;
+            
+            let baseDuration = 15000;
+            if (next === 1) baseDuration = 15000;
+            if (next === 2) baseDuration = 60000;
+            if (next === 3) baseDuration = 45000;
+            
+            showSlide(next);
+            slideTimeout = setTimeout(goToNextSlide, baseDuration / speedMultiplier);
         }
 
         function runRotation() {
-            // Slide 1 : 15 secondes
             showSlide(1);
-            setTimeout(() => {
-                // Slide 2 : 60 secondes
-                showSlide(2);
-                setTimeout(() => {
-                    // Slide 3 : 45 secondes
-                    showSlide(3);
-                    setTimeout(() => {
-                        runRotation(); // Recommence la boucle
-                    }, 45000);
-                }, 60000);
-            }, 15000);
+            slideTimeout = setTimeout(goToNextSlide, 15000 / speedMultiplier);
         }
 
-        // D�marrage de la boucle apr�s chargement
         window.onload = runRotation;
     </script>
 </body>
