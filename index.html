@@ -199,6 +199,16 @@
             z-index: 1000;
         }
 
+        .version-label {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: var(--bleu-marine);
+            opacity: 0.5;
+            z-index: 1000;
+        }
+
         .speed-btn, .next-btn {
             font-size: 1.5rem;
             color: var(--bleu-marine);
@@ -252,7 +262,7 @@
     <div id="slide2" class="slide">
         <div class="title-overlay">WEBCAM EN DIRECT - NEUCHATEL HARDELOT</div>
         <div class="webcam-container">
-            <iframe src="https://pv.viewsurf.com/1246/Neufchatel-Hardelot?i=NTMyMDo&autoplay=1" class="webcam-frame" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <iframe src="https://pv.viewsurf.com/1246/Neufchatel-Hardelot" class="webcam-frame" frameborder="0" scrolling="no" allow="autoplay; fullscreen" allowfullscreen="allowfullscreen"></iframe>
         </div>
     </div>
 
@@ -265,7 +275,7 @@
                     <script id="wg_fwdg_1906_100_1776432265339">
                     (function (window, document) {
                       var loader = function () {
-                        var arg = ["s=1906" ,"m=100","uid=wg_fwdg_1906_100_1776432265339" ,"wj=knots" ,"tj=c" ,"waj=m" ,"tij=cm" ,"odh=0" ,"doh=24" ,"fhours=156" ,"hrsm=1" ,"vt=forecasts" ,"lng=fr" ,"idbs=1" ,"p=WINDSPD,GUST,SMER,TMPE,FLHGT,CDC,APCP1s,RATING"];
+                        var arg = ["s=1906" ,"m=100","uid=wg_fwdg_1906_100_1776432265339" ,"wj=knots" ,"tj=c" ,"waj=m" ,"tij=cm" ,"odh=0" ,"doh=24" ,"fhours=156" ,"hrsm=3" ,"vt=forecasts" ,"lng=fr" ,"idbs=1" ,"p=WINDSPD,GUST,SMER,TMPE,FLHGT,CDC,APCP1s,RATING"];
                         var script = document.createElement("script");
                         var tag = document.getElementsByTagName("script")[0];
                         script.src = "https://www.windguru.cz/js/widget.php?"+(arg.join("&"));
@@ -287,6 +297,8 @@
 
         </div>
     </div>
+
+    <div class="version-label">v-ec88b82</div>
 
     <div class="controls">
         <div class="speed-btn" onclick="toggleFullscreen()" title="Plein écran">&#x26F6;</div>
